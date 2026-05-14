@@ -166,4 +166,24 @@ class VendorController extends BaseController
             'id' => $id
         ]);
     }
+
+    public function stepUpdate()
+    {
+        $id = session()->get('id');
+
+        $result = $this->profileService->updateStep($id);
+
+        if ($result) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Step updated successfully'
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Failed to update step'
+        ]);
+}
+
 }

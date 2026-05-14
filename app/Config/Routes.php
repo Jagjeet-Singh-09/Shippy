@@ -17,6 +17,9 @@ $routes->get('/userDashboard', 'Users\AuthController::userDashboard');
 $routes->get('/api/getVendorDocs', 'Users\UserController::getAllVendorDocs');
 $routes->get('/vendor-documents/(:num)', 'Users\UserController::vendorDocumentsPage/$1');
 $routes->get('api/vendor-documents/(:num)','Users\UserController::getVendorDocuments/$1');
+$routes->post('/api/vendor/stepUpdate/','Vendors\VendorController::stepUpdate');
+
+
 
 $routes->post('/api/update-vendor-status/(:num)', 'Users\UserController::updateVendorStatus/$1');
 

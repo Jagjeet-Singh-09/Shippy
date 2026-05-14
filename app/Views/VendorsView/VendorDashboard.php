@@ -30,6 +30,18 @@
             max-width: 1300px;
             margin: auto;
         }
+        .uploadbtn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
 
         h1 {
             text-align: center;
@@ -177,14 +189,19 @@
 
         <h1>Vendor Documents</h1>
 
+        <div class="card">
+
+                <button class="uploadbtn" onclick="uploadDocument()"> Upload button</button>
+
+            <div class="card">
+
         <div class="document-grid">
 
 
             <!-- ========================= -->
             <!-- AADHAR -->
             <!-- ========================= -->
-
-            <div class="card">
+             
 
                 <div class="doc-title">
                     Aadhar Card
@@ -531,6 +548,22 @@
 
             });
 
+        }
+
+        function uploadDocument() {
+           $.ajax({
+                url: "/api/vendor/stepUpdate/",
+                type: "POST",
+                success: function(response) {
+                    alert("Document uploaded successfully!");  
+                 window.location.href = "/profileCreation";
+                              },
+                error: function(xhr) {
+                    console.log(xhr);
+                    alert("Failed to upload document");
+                }
+            });
+           
         }
 
 

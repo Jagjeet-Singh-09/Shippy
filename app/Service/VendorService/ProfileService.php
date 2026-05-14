@@ -47,4 +47,9 @@ class ProfileService
         return $this->profileModel->getDocuments($id);
     }
 
+    public function updateStep($id)
+    {
+        return $this->profileModel->updateStep($id);
+    }
+
 }

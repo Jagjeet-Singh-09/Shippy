@@ -188,4 +188,13 @@ WHERE user_id = ?;";
 
         return $query->getRowArray();
     }
+
+    public function updateStep($id)
+    {
+        $sql = "UPDATE vendor_register_steps
+                SET step_three = '0000-00-00 00:00:00'
+                WHERE user_id = ?";
+
+        return $this->db->query($sql, [$id]);
+}
 }
