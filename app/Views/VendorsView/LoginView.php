@@ -194,6 +194,9 @@
         <button class="register-btn" onclick="goToRegister()">
             Not Registered? Sign Up
         </button>
+        <a href="<?= base_url('auth/google') ?>">
+            Login With Google
+        </a>
 
         <div class="message" id="message"></div>
 

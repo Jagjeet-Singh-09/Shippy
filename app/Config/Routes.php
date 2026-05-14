@@ -20,6 +20,16 @@ $routes->get('api/vendor-documents/(:num)','Users\UserController::getVendorDocum
 $routes->post('/api/vendor/stepUpdate/','Vendors\VendorController::stepUpdate');
 
 
+$routes->get(
+    'auth/google',
+    'Vendors\AuthController::googleLogin'
+);
+
+$routes->get(
+    'auth/googleCallback',
+    'Vendors\AuthController::googleCallback'
+);
+$routes->get('/logout', 'Vendors\AuthController::logout');
 
 $routes->post('/api/update-vendor-status/(:num)', 'Users\UserController::updateVendorStatus/$1');
 
