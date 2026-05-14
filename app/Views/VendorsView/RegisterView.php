@@ -223,6 +223,9 @@
         <button class="login-btn" onclick="goToLogin()">
             Already Registered? Login
         </button>
+        <a href="<?= base_url('auth/google') ?>">
+            Login With Google
+        </a>
 
         <div class="message" id="message"></div>
 

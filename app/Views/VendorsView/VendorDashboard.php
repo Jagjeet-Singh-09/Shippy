@@ -4,7 +4,6 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Vendor Documents</title>
@@ -12,145 +11,184 @@
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <style>
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background: #f4f7ff;
-            padding: 40px;
+            background:
+                linear-gradient(135deg, #eef4ff 0%, #f8fbff 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
         }
 
         .container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: auto;
         }
-        .uploadbtn {
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-block;
-}
 
-        h1 {
-            text-align: center;
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 35px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .page-title {
+            font-size: 38px;
+            font-weight: 700;
             color: #1565ff;
+        }
+
+        .uploadbtn {
+            background: linear-gradient(135deg, #1565ff, #0d47c7);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 10px 20px rgba(21, 101, 255, 0.25);
+        }
+
+        .uploadbtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(21, 101, 255, 0.35);
         }
 
         .document-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
         }
 
         .card {
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.06);
+            transition: 0.3s ease;
+            border: 1px solid #edf2ff;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
         }
 
         .doc-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #1565ff;
             text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            color: #1565ff;
+            margin-bottom: 22px;
+        }
+
+        .doc-image,
+        .doc-pdf {
+            width: 100%;
+            height: 420px;
+            border-radius: 18px;
+            border: 1px solid #dce5ff;
+            background: #f7f9ff;
         }
 
         .doc-image {
-            width: 100%;
-            height: 400px;
             object-fit: cover;
-            border-radius: 12px;
-            border: 1px solid #ddd;
         }
 
         .doc-pdf {
-            width: 100%;
-            height: 400px;
-            border: none;
-            border-radius: 12px;
+            overflow: hidden;
         }
 
         .info-box {
-            margin-top: 18px;
+            margin-top: 20px;
+            padding: 16px;
             background: #f7f9ff;
-            padding: 12px;
-            border-radius: 10px;
+            border-radius: 14px;
+            border: 1px solid #e5edff;
         }
 
         .info-label {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 5px;
+            font-size: 13px;
             font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .info-value {
-            font-size: 16px;
-            color: #222;
+            font-size: 17px;
+            font-weight: 600;
+            color: #111827;
             word-break: break-word;
         }
 
         .status-box {
-            margin-top: 18px;
+            margin-top: 22px;
             text-align: center;
         }
 
         .status-label {
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #444;
+            margin-bottom: 12px;
+            color: #4b5563;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .status-value {
             display: inline-block;
-            padding: 10px 20px;
-            border-radius: 30px;
+            min-width: 130px;
+            padding: 12px 24px;
+            border-radius: 40px;
             color: white;
-            font-weight: bold;
+            font-size: 15px;
+            font-weight: 700;
             text-transform: capitalize;
+            letter-spacing: 0.5px;
         }
 
         .pending {
-            background: orange;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
         }
 
         .approved {
-            background: green;
+            background: linear-gradient(135deg, #16a34a, #15803d);
         }
 
         .rejected {
-            background: red;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
         }
 
         .final-status-section,
         .remarks-section {
             margin-top: 40px;
             background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.06);
+            border: 1px solid #edf2ff;
         }
 
-        .final-status-section h2,
-        .remarks-section h2 {
+        .section-title {
             text-align: center;
-            margin-bottom: 20px;
+            font-size: 30px;
+            font-weight: 700;
             color: #1565ff;
+            margin-bottom: 25px;
         }
 
         .final-status {
@@ -158,18 +196,38 @@
         }
 
         .remarks-box {
-            background: #f7f7f7;
-            padding: 20px;
-            border-radius: 12px;
-            line-height: 1.7;
-            color: #333;
-            min-height: 120px;
+            background: #f8faff;
+            border-radius: 18px;
+            padding: 24px;
+            line-height: 1.9;
+            color: #374151;
+            font-size: 16px;
+            border: 1px solid #e5edff;
+            min-height: 140px;
         }
 
-        @media(max-width:768px) {
+        @media(max-width: 768px) {
 
             body {
-                padding: 20px;
+                padding: 20px 15px;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .page-title {
+                font-size: 30px;
+                text-align: center;
+            }
+
+            .uploadbtn {
+                width: 100%;
+            }
+
+            .document-grid {
+                grid-template-columns: 1fr;
             }
 
             .doc-image,
@@ -177,8 +235,11 @@
                 height: 300px;
             }
 
+            .final-status-section,
+            .remarks-section {
+                padding: 24px;
+            }
         }
-
     </style>
 
 </head>
@@ -187,21 +248,27 @@
 
     <div class="container">
 
-        <h1>Vendor Documents</h1>
+        <!-- HEADER -->
+        <div class="page-header">
 
-        <div class="card">
+            <div class="page-title">
+                Vendor Documents
+            </div>
 
-                <button class="uploadbtn" onclick="uploadDocument()"> Upload button</button>
+            <button class="uploadbtn" onclick="uploadDocument()">
+                Upload Document
+            </button>
 
-            <div class="card">
+        </div>
 
+        <!-- DOCUMENT GRID -->
         <div class="document-grid">
-
 
             <!-- ========================= -->
             <!-- AADHAR -->
             <!-- ========================= -->
-             
+
+            <div class="card">
 
                 <div class="doc-title">
                     Aadhar Card
@@ -213,8 +280,6 @@
                     src=""
                     alt="Aadhar Card">
 
-
-                <!-- Aadhar Number -->
                 <div class="info-box">
 
                     <div class="info-label">
@@ -231,8 +296,6 @@
 
                 </div>
 
-
-                <!-- Aadhar Status -->
                 <div class="status-box">
 
                     <div class="status-label">
@@ -251,8 +314,6 @@
 
             </div>
 
-
-
             <!-- ========================= -->
             <!-- PAN -->
             <!-- ========================= -->
@@ -269,8 +330,6 @@
                     src=""
                     alt="PAN Card">
 
-
-                <!-- PAN Number -->
                 <div class="info-box">
 
                     <div class="info-label">
@@ -287,10 +346,6 @@
 
                 </div>
 
-
-              
-
-                <!-- PAN STATUS -->
                 <div class="status-box">
 
                     <div class="status-label">
@@ -309,8 +364,6 @@
 
             </div>
 
-
-
             <!-- ========================= -->
             <!-- GST -->
             <!-- ========================= -->
@@ -327,8 +380,6 @@
                     src="">
                 </iframe>
 
-
-                <!-- GST Number -->
                 <div class="info-box">
 
                     <div class="info-label">
@@ -345,10 +396,6 @@
 
                 </div>
 
-
-
-
-                <!-- GST STATUS -->
                 <div class="status-box">
 
                     <div class="status-label">
@@ -369,15 +416,13 @@
 
         </div>
 
-
-
-        <!-- ========================= -->
         <!-- FINAL STATUS -->
-        <!-- ========================= -->
 
         <div class="final-status-section">
 
-            <h2>Final Vendor Status</h2>
+            <div class="section-title">
+                Final Vendor Status
+            </div>
 
             <div class="final-status">
 
@@ -393,15 +438,13 @@
 
         </div>
 
-
-
-        <!-- ========================= -->
         <!-- REMARKS -->
-        <!-- ========================= -->
 
         <div class="remarks-section">
 
-            <h2>Remarks From Admin</h2>
+            <div class="section-title">
+                Remarks From Admin
+            </div>
 
             <div
                 class="remarks-box"
@@ -415,18 +458,17 @@
 
     </div>
 
-
-
     <script>
 
         // GET VENDOR ID FROM URL
         let vendorId = window.location.pathname.split("/").pop();
+
         console.log(vendorId);
-
-
 
         // SET STATUS CLASS
         function setStatusClass(elementId, status) {
+
+            status = status || "pending";
 
             $("#" + elementId)
                 .removeClass("pending approved rejected")
@@ -435,12 +477,11 @@
 
         }
 
-
-
         // LOAD DOCUMENTS
         function loadDocuments() {
 
             $.ajax({
+
                 url: "/api/vendor-documents/" + vendorId,
 
                 type: "GET",
@@ -460,14 +501,10 @@
                         response.aadhar_card
                     );
 
-                   
-
                     setStatusClass(
                         "aadharStatus",
                         response.aadhar_card_status
                     );
-
-
 
                     // =========================
                     // PAN
@@ -482,14 +519,10 @@
                         response.pan_card
                     );
 
-                
-
                     setStatusClass(
                         "panStatus",
                         response.pan_card_status
                     );
-
-
 
                     // =========================
                     // GST
@@ -504,14 +537,10 @@
                         response.gst_number
                     );
 
-                   
-
                     setStatusClass(
                         "gstStatus",
                         response.gst_status
                     );
-
-
 
                     // =========================
                     // FINAL STATUS
@@ -521,8 +550,6 @@
                         "finalStatus",
                         response.final_status
                     );
-
-
 
                     // =========================
                     // REMARKS
@@ -550,23 +577,34 @@
 
         }
 
+        // UPLOAD DOCUMENT
         function uploadDocument() {
-           $.ajax({
+
+            $.ajax({
+
                 url: "/api/vendor/stepUpdate/",
+
                 type: "POST",
+
                 success: function(response) {
-                    alert("Document uploaded successfully!");  
-                 window.location.href = "/profileCreation";
-                              },
+
+                    alert("Document uploaded successfully!");
+
+                    window.location.href = "/profileCreation";
+
+                },
+
                 error: function(xhr) {
+
                     console.log(xhr);
+
                     alert("Failed to upload document");
+
                 }
+
             });
-           
+
         }
-
-
 
         // INITIAL LOAD
         loadDocuments();

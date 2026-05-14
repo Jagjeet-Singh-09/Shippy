@@ -5,6 +5,10 @@ namespace App\Controllers\Vendors;
 use App\Controllers\BaseController;
 use App\Service\VendorService\AuthService;
 use App\Validation\UserValidation\UserValidations;
+use League\OAuth2\Client\Provider\Google;
+
+
+
 
 
 
@@ -14,6 +18,7 @@ class AuthController extends BaseController
 {
     protected $authService;
     protected $userValidations;
+    private $provider;
 
 
     public function __construct()
@@ -21,7 +26,52 @@ class AuthController extends BaseController
         $this->authService = new AuthService();
         $this->userValidations = new UserValidations();
 
-        
+        $this->provider = new Google([
+            'clientId'     => env('GOOGLE_CLIENT_ID'),
+            'clientSecret' => env('GOOGLE_CLIENT_SECRET'),
+            'redirectUri'  => env('GOOGLE_REDIRECT_URI'),
+        ]);
+    }
+    public function googleLogin()
+    {
+        $authUrl = $this->provider->getAuthorizationUrl();
+
+        session()->set('oauth2state', $this->provider->getState());
+
+        return redirect()->to($authUrl);
+    }
+
+    public function googleCallback()
+    {
+        try {
+
+            $token = $this->provider->getAccessToken(
+                'authorization_code',
+                [
+                    'code' => $this->request->getVar('code')
+                ]
+            );
+
+            $owner = $this->provider->getResourceOwner($token);
+
+            $user = $owner->toArray();
+
+            session()->set([
+                'name'       => $user['name'],
+                'email'      => $user['email'],
+                'isLoggedIn' => true
+            ]);
+            $phoneNumber = null;
+            $email = $user['email'];
+            $hashedPassword = null;
+
+            $this->authService->createUser($phoneNumber, $email, $hashedPassword);
+
+            return redirect()->to('/profileCreation');
+        } catch (\Exception $e) {
+
+            echo $e->getMessage();
+        }
     }
 
     public function index(): string
@@ -51,7 +101,7 @@ class AuthController extends BaseController
                 ]);
         }
 
-        
+
         $password = $this->request->getPost('password');
 
         if (!$this->userValidations->checkPassword($password)) {
@@ -90,7 +140,7 @@ class AuthController extends BaseController
                 ]);
         }
 
-        
+
         $password = $this->request->getPost('password');
 
         if (!$this->userValidations->checkPassword($password)) {
@@ -118,7 +168,7 @@ class AuthController extends BaseController
 
 
 
-        
+
         if ($result) {
 
             return $this->response->setJSON([
