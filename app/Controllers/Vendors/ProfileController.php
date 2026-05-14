@@ -32,28 +32,32 @@ class ProfileController extends BaseController
     public function renderForm()
     {
         $email = session()->get('email');
+        $id = session()->get('id');
         $userID = $this->profileService->getId($email);
         $step = $this->profileService->getStep($userID);
 
         if ($step['step_one'] == "0000-00-00 00:00:00") {
 
             return $this->response->setJson([
-                'message' => 'step_oneView'
+                'message' => 'step_oneView',
+                'id' => $id 
             
             ]);
         } else if ($step['step_two'] == "0000-00-00 00:00:00") {
             return $this->response->setJson([
-                'message' => 'step_twoView'
-                
+                'message' => 'step_twoView',
+                'id' => $id
             ]);
         } else if ($step['step_three'] == "0000-00-00 00:00:00") {
             return $this->response->setJson([
-                'message' => 'step_threeView'
-               
+                'message' => 'step_threeView',
+                'id' => $id
+
             ]);
         } else {
             return $this->response->setJson([
-                'message' => 'DashboardView'
+                'message' => 'DashboardView',
+                'id' => $id
             ]);
         }
     }

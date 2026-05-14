@@ -33,7 +33,7 @@ $routes->post('/api/user/login', 'Users\AuthController::checkLogIn');
 
 $routes->get('/api/renderForm', 'Vendors\ProfileController::renderForm');
 $routes->get('/profileCreation', 'Vendors\ProfileController::profileCreation');
-$routes->get('/VendorDashboard', 'Vendors\ProfileController::VendorDashboard');
+$routes->get('/VendorDashboard/(:num)', 'Vendors\ProfileController::VendorDashboard/$1');
 $routes->get('/api/getDocuments', 'Vendors\ProfileController::getDocuments');
 
 

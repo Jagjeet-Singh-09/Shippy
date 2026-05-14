@@ -36,7 +36,31 @@ class UserService
     // UPDATE STATUS
     public function updateVendorStatus($id, $status,$type)
     {
-        return $this->userModel->updateVendorStatus($id, $status,$type);
+        $result = $this->userModel->updateVendorStatus($id, $status,$type);
+        $this->updateFinalStatus($id);
+        return $result;
     }
+
+    public function updateFinalStatus($id){
+
+        $data = $this->userModel->getFinalStatus($id);
+        if($data['aadhar_card_status'] == 'approved' && $data['pan_card_status'] == 'approved' && $data['gst_status'] == 'approved'){
+
+            $finalStatus = 'approved';
+
+        } else if ($data['aadhar_card_status'] == 'rejected' || $data['pan_card_status'] == 'rejected' || $data['gst_status'] == 'rejected') {
+
+            $finalStatus = 'rejected';
+
+        } else {
+
+            $finalStatus = 'pending';
+
+        }
+
+        $this->userModel->updateFinalStatus($id, $finalStatus);
+
+    }
+
 
 }

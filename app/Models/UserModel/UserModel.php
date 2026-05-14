@@ -138,4 +138,32 @@ class UserModel
 
     ];
 }
+
+    public function getFinalStatus($id){
+        $sql = "SELECT * FROM vendor_docs WHERE vendor_id = ?";
+
+        $query = $this->db->query($sql, [$id]);
+
+        return $query->getRowArray();
+    }
+
+    public function updateFinalStatus($id, $finalStatus){
+        $sql = "UPDATE vendor_docs
+                SET final_status = ?
+                WHERE vendor_id = ?";
+
+        $result = $this->db->query($sql, [
+            $finalStatus,
+            $id
+
+        ]);
+
+        return [
+
+            'success' => (bool)$result,
+
+            'message' => 'Final Status Updated Successfully'
+
+        ];
+    }
 }

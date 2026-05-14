@@ -101,6 +101,8 @@
 
     <script>
 
+        let id;
+
 
         $(document).ready(function () {
 
@@ -112,6 +114,7 @@
                 success: function (response) {
 
                     let step = response.message;
+                    id = response.id;
                     
                     
 
@@ -276,7 +279,7 @@
 
             else if (step == "DashboardView") {
 
-                window.location.href = "/VendorDashboard";
+                window.location.href = "/VendorDashboard/" + id;
             }
 
             $("#dynamicForm").html(html);
@@ -426,7 +429,7 @@
 
                     setTimeout(() => {
 
-                        window.location.href = "/VendorDashboard";
+                        window.location.href = "/VendorDashboard/" + id;
 
                     }, 1000);
 
